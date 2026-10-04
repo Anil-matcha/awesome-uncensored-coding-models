@@ -20,4 +20,4 @@ Classify each response as `answered`, `partial`, `refused`, or `unclear`. Comput
 
 ## Reporting
 
-Report the median of at least three runs per task for numeric scores and latency. Include the number of tasks and runs, missing/error runs, model digest, quantization, hardware, runtime, and sampling settings. Publish per-task scores and raw outputs alongside any aggregate. Do not compare scores collected with different task versions or materially different settings without labeling the difference.
+Report the median of at least three runs per task for numeric scores and latency. Include the number of tasks and runs, missing/error runs, exact Muapi model ID, live tool capability, date, API token usage, sampling settings, and app/version for manual agent runs. Check the Muapi dashboard for credits spent and record the amount if reporting cost. Publish per-task scores and raw outputs alongside any aggregate. Do not compare scores collected with different task versions or materially different settings without labeling the difference.

@@ -1,1 +1,1 @@
-uncensored-coding-models,local-llm,coding-models,ollama,model-evaluation,benchmark,open-weight-models,llm,python,code-generation
+uncensored-coding-models,muapi,coding-models,hosted-llm,model-evaluation,benchmark,tool-calling,codex-cli,claude-code,opencode,openai-compatible-api,python
