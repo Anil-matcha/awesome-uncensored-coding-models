@@ -5,6 +5,7 @@ import argparse
 import datetime as dt
 import json
 import os
+import platform
 import re
 import sys
 import time
@@ -19,6 +20,14 @@ TASKS = ROOT / "benchmark" / "tasks.jsonl"
 
 def slug(value: str) -> str:
     return re.sub(r"[^a-zA-Z0-9._-]+", "-", value).strip("-.") or "model"
+
+
+def get_json(url: str):
+    try:
+        with urllib.request.urlopen(url, timeout=5) as response:
+            return json.load(response)
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+        return None
 
 
 def main() -> int:
@@ -42,6 +51,21 @@ def main() -> int:
     output_dir.mkdir(exist_ok=True)
     output_path = output_dir / f"{slug(args.model)}.jsonl"
     endpoint = args.host.rstrip("/") + "/api/chat"
+    host = args.host.rstrip("/")
+    version_info = get_json(host + "/api/version")
+    tags_info = get_json(host + "/api/tags")
+    model_digest = None
+    if tags_info:
+        model_digest = next(
+            (item.get("digest") for item in tags_info.get("models", []) if item.get("name") == args.model),
+            None,
+        )
+    runtime_metadata = {
+        "ollama_version": version_info.get("version") if version_info else None,
+        "model_digest": model_digest,
+        "platform": platform.platform(),
+        "machine": platform.machine(),
+    }
     count = 0
     with output_path.open("a", encoding="utf-8") as out:
         for task in tasks:
@@ -69,6 +93,7 @@ def main() -> int:
                     "timestamp_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
                     "temperature": args.temperature,
                     "seed": args.seed + run - 1,
+                    **runtime_metadata,
                     "prompt": task["prompt"],
                 }
                 try:

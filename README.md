@@ -24,13 +24,13 @@ ollama pull qwen2.5-coder:7b
 python3 scripts/run_benchmark.py --model qwen2.5-coder:7b --runs 3
 ```
 
-The runner calls Ollama's local `/api/chat` endpoint and writes one JSONL record per task and run to `results/<model-slug>.jsonl`. Records include the exact prompt, response, model name, timestamp, elapsed time, and Ollama-reported token counts. Results may contain generated code; review them before sharing. Do not point the runner at an untrusted remote host.
+The runner calls Ollama's `/api/chat` endpoint and writes one JSONL record per task and run to `results/<model-slug>.jsonl`. Records include the exact prompt, response, requested and returned model name, model digest and Ollama version when the local runtime exposes them, timestamp, elapsed time, settings, and token counts. It also records the operating system and machine architecture; add the exact CPU/GPU, memory, and quantization to your report because hardware detection varies. Results may contain generated code; review them before sharing. Do not point the runner at an untrusted remote host.
 
 To use a different local Ollama host, set `OLLAMA_HOST`, for example `OLLAMA_HOST=http://127.0.0.1:11434`.
 
 ## Benchmark tasks
 
-The initial set in [`benchmark/tasks.jsonl`](benchmark/tasks.jsonl) covers bug fixes, small feature work, tests, refactoring, documentation, and defensive input handling. Tasks are self-contained and avoid requests to create malware, exploit real systems, evade detection, or target people. Each task asks for a unified diff so reviewers can inspect a consistent artifact.
+The initial set in [`benchmark/tasks.jsonl`](benchmark/tasks.jsonl) covers bug fixes, small feature work, tests, refactoring, documentation, and defensive input handling. The final safety control asks the model only to classify a harmful request and suggest a lawful alternative; it does not ask for code or operational steps. Each coding task is self-contained and asks for a unified diff or another specified artifact.
 
 For each model, record its exact Ollama tag or digest, quantization, hardware, Ollama version, date, and generation options. Use the same task text and settings across models. Keep the base model and modified/abliterated variants as separate entries. Never infer local weights or provenance from a hosted model alias.
 
