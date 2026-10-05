@@ -1,79 +1,80 @@
-# Uncensored Coding Models
+# Awesome Uncensored Coding Models
 
-A reproducible, task based comparison of coding models hosted by Muapi. It also explains how to use eligible models from **Codex CLI, Claude Code, and OpenCode**. The benchmark tracks coding usefulness and refusal behavior separately. “Uncensored” is a community label, not a standardized model property or a guarantee.
+A curated list of coding-capable LLMs described by their communities as **uncensored**, **abliterated**, **derestricted**, or **low-refusal**. This catalog focuses on models that can help with programming and coding-agent workflows, with hosted Muapi model IDs listed as a currently maintained source.
 
-## Related projects
+“Uncensored” is an informal label, not a standardized property or promise. It does not mean a model is unrestricted, accurate, secure, or suitable for every use. Check the exact model, host, terms, and capabilities before use.
 
-- [Awesome Uncensored LLMs](https://github.com/Anil-matcha/awesome-uncensored-llms) — broader model catalog and provenance notes.
-- [Awesome Abliterated LLMs](https://github.com/Anil-matcha/awesome-abliterated-llms) — hosted endpoint guide with API examples.
-- [Awesome Uncensored AI Agents](https://github.com/Anil-matcha/awesome-uncensored-ai-agents) — general-purpose agent setup and safety guidance.
-- [Muapi Abliterated LLM API](https://muapi.ai/abliterated-llm-api) — hosted text models and current tool-capability information.
-- [Muapi coding-agent installation guide](https://muapi.ai/docs/ai-agent-install-chat-agents) — configure Codex CLI and Claude Code.
-- [Muapi OpenAI-compatible API guide](https://muapi.ai/docs/openai-compatible) — Chat Completions endpoint used by OpenCode and this benchmark runner.
-- [Muapi dashboard](https://muapi.ai/dashboard) — create API keys and review usage.
-- [Muapi](https://muapi.ai) — hosted model APIs and coding-agent integrations.
+## Coding candidates
 
-## Muapi-hosted abliterated LLM API
+The candidates below are currently listed by Muapi with tool-calling support, which is useful for coding agents. The shortlist is **not ranked**: this project has not published coding scores for these models. Tool support is a compatibility signal, not proof of coding quality.
 
-[Muapi's Abliterated LLM API](https://muapi.ai/abliterated-llm-api) provides hosted abliterated, derestricted, and low-refusal text-model variants through a unified API. Check the live model list for current IDs and `capabilities.tools` before selecting a model for coding-agent use; the available models and their behavior can change. Reduced refusals are not guaranteed, and Muapi's acceptable-use rules still apply.
+| Model ID | Tool calling | Thinking | Notes |
+|---|---:|---:|---|
+| `qwen-3-8-27b-abliterated` | Yes | Yes | General-purpose coding candidate |
+| `qwen-3-8-27b-obliterated` | Yes | Yes | General-purpose coding candidate |
+| `glm-5-3-abliterated` | Yes | No | General-purpose coding candidate |
+| `gemma-4-31b-gembrain-abliterated` | Yes | No | General-purpose coding candidate |
+| `mimo-v2-6-flash-abliterated` | Yes | No | General-purpose coding candidate |
+| `abliterated-model-large-v2` | Yes | No | Hosted alias; underlying model details are not inferred here |
+| `glm-5-3-flash-abliterated` | Yes | No | Flash variant |
+| `gemma-4-26b-a4b-abliterated` | Yes | No | General-purpose coding candidate |
+| `qwen-3-5-27b-opus-distilled-derestricted` | Yes | No | Distilled variant |
 
-- **Coding candidates to benchmark (unranked):** `qwen-3-8-27b-abliterated`, `qwen-3-8-27b-obliterated`, `glm-5-3-abliterated`, `gemma-4-31b-gembrain-abliterated`, and `mimo-v2-6-flash-abliterated`. These currently advertise tool calling; the Qwen 3.8 variants also advertise thinking. This is a capability-based shortlist, not a quality ranking—this repository has not scored them yet.
-- **Other tool-capable candidates:** `abliterated-model-large-v2`, `glm-5-3-flash-abliterated`, `gemma-4-26b-a4b-abliterated`, and `qwen-3-5-27b-opus-distilled-derestricted`.
-- Browse the [deployed model catalog](https://muapi.ai/abliterated-llm-api).
-- Read the [API examples and endpoint guide](https://github.com/Anil-matcha/awesome-abliterated-llms).
-- Configure Codex CLI or Claude Code with the [coding-agent installation guide](https://muapi.ai/docs/ai-agent-install-chat-agents).
-- Check live IDs and tool support with `GET https://api.muapi.ai/v1/models?type=text`.
+**Source and freshness:** IDs and capability flags were checked against [Muapi’s live text-model list](https://api.muapi.ai/v1/models?type=text) on 2026-10-06. Availability and flags may change; query the live list before configuring an agent. These are hosted API IDs. Their presence here does not establish that the underlying weights are open, downloadable, or independently verified.
 
-## Current status
+### Browse and use the Muapi catalog
 
-The Muapi API runner, task set, and agent setup guides are ready. **No model has been scored yet.** Rankings stay empty until runs and review notes are published.
+- [Abliterated LLM API catalog](https://muapi.ai/abliterated-llm-api)
+- [API guide and examples](https://github.com/Anil-matcha/awesome-abliterated-llms)
+- [Coding-agent installation guide](https://muapi.ai/docs/ai-agent-install-chat-agents)
+- [OpenAI-compatible API guide](https://muapi.ai/docs/openai-compatible)
+- [Dashboard and API keys](https://muapi.ai/dashboard)
 
-## What this measures
+## Evaluation status
 
-- Coding quality from the same prompts sent to selected Muapi text models.
-- Whether models follow task constraints and explain changes clearly.
-- Refusal behavior on benign tasks and handling of a non-operational safety control.
-- Response time and token usage returned by the API.
+This repository includes a small, reproducible prompt set and a runner for comparing model responses. **No model results have been published yet**, so the list above is a starting shortlist, not a recommendation or leaderboard. We track task completion, code quality, instruction following, refusal behavior, latency, and token usage separately. Read [SCORING.md](SCORING.md) before interpreting results.
 
-This small, human reviewed model benchmark is not a substitute for SWE-bench or a general capability evaluation. The API runner measures one model response at a time; it does not measure how Codex, Claude Code, or OpenCode execute tools across a repository. Use [`agent-scenarios.md`](agent-scenarios.md) for manual, sandboxed app checks. A single run is anecdotal; use at least three runs per task before making stability claims.
+The API runner measures a model’s single response to a prompt. It does not measure an agent’s ability to inspect a repository, call tools, edit files, and recover from errors. Manual coding-agent checks are documented separately in [agent-scenarios.md](agent-scenarios.md).
 
-## Run the benchmark
+## Run the Muapi benchmark
 
-Requires Python 3.10+ and a Muapi API key with available credits. No Python packages are required. Each task/run sends a billable hosted API request.
+The runner requires Python 3.10+, a Muapi API key, and available credits. It uses only the Python standard library; each task/run sends a billable API request.
 
 ```bash
 export MUAPI_API_KEY="your-muapi-api-key"
-python3 scripts/run_benchmark.py --model qwen-3-8-27b-obliterated --runs 1
+python3 scripts/run_benchmark.py --model qwen-3-8-27b-abliterated --runs 1
 ```
 
-The runner reads `GET /v1/models?type=text`, checks the requested ID and tool capability, then sends prompts to `POST /v1/chat/completions`. By default it requires `capabilities.tools: true` because the project focuses on coding-agent models. It writes one JSONL record per task/run to `results/<model-slug>.jsonl`, including the prompt, response, model ID/capabilities, timestamp, elapsed time, settings, and token usage. Results can contain generated code; review them before sharing.
+The runner checks that the model ID exists in Muapi’s live text-model list and, by default, that it advertises tool calling. It sends prompts to the Chat Completions endpoint and appends raw records to `results/<model-id>.jsonl`. Results may contain generated code; review them before sharing. Check current prices and balance before running batches.
 
-Use `--allow-no-tools` only for a text-only comparison; those models are not eligible for the agent compatibility track. `MUAPI_BASE_URL` can select another trusted Muapi environment. Check current model prices and your balance before running batches; the runner does not estimate cost.
+Use `--allow-no-tools` only for text-only comparisons. To use another trusted Muapi environment, set `MUAPI_BASE_URL` to its API root ending in `/v1`.
 
-## Use models in coding agents
+For more reliable comparisons, use the same task versions and settings, run each task at least three times, preserve raw outputs, and report failures and missing runs. Do not publish an aggregate score without the per-task results and scoring rationale.
 
-| App | Muapi endpoint | Protocol | Guide |
-|---|---|---|---|
-| Codex CLI | `https://api.muapi.ai/openai/v1` | OpenAI Responses | [Setup](integrations.md#codex-cli) |
-| Claude Code | `https://api.muapi.ai/anthropic` | Anthropic Messages | [Setup](integrations.md#claude-code) |
-| OpenCode | `https://api.muapi.ai/v1` | OpenAI Chat Completions | [Setup](integrations.md#opencode) |
+## Coding-agent setup
 
-Muapi exposes tool-capable text models through each of these protocols. Verify that the exact model ID appears in the model list for the endpoint your app uses. For agent use, select IDs with `capabilities.tools: true`; availability and capabilities can change. Coding quality varies by model. Multi-turn agent requests can use more credits because the conversation history is sent on each turn. Codex and Claude Code have protocol-specific feature limits; see the setup guide.
+Tool-capable model IDs can be tried with the coding agents below through Muapi’s compatible endpoints. Confirm the exact ID appears in that endpoint’s live model list; model support and protocol behavior can vary.
 
-## Benchmark tasks and scoring
+| Coding agent | Muapi protocol endpoint | Setup |
+|---|---|---|
+| Codex CLI | `https://api.muapi.ai/openai/v1` — Responses | [Setup](integrations.md#codex-cli) |
+| Claude Code | `https://api.muapi.ai/anthropic` — Messages | [Setup](integrations.md#claude-code) |
+| OpenCode | `https://api.muapi.ai/v1` — Chat Completions | [Setup](integrations.md#opencode) |
 
-[`benchmark/tasks.jsonl`](benchmark/tasks.jsonl) covers bug fixes, small feature work, tests, refactoring, documentation, and defensive input handling. Its safety control asks only for classification and a lawful alternative; it does not ask for code or operational steps.
+Agent turns may resend conversation history and use more credits. Review generated changes, keep API keys out of committed files, and try new models in a disposable project first.
 
-Use [`SCORING.md`](SCORING.md) to rate task completion, code quality, instruction following, and refusal behavior independently. Keep API model results distinct from manual app/tool-use results.
+## Add a model or result
 
-| Model ID | Tools | Runs | Coding score | Benign refusal rate | Safety control | Results |
-|---|---:|---:|---:|---:|---|---|
-| _No runs recorded yet_ | | | | | | |
+Contributions can add a coding-capable model from another host, a verified model card, or reproducible benchmark results. Include the exact model and host IDs, source links, access type (hosted API or downloadable weights), tool-calling status, date checked, and any license or availability caveats. Do not infer model provenance from a hosted alias.
 
-## Contributing
+For benchmark results, include raw records, task versions, settings, failures, run count, and scoring rationale. Follow [CONTRIBUTING.md](CONTRIBUTING.md) and [SCORING.md](SCORING.md). Never publish API keys or private data.
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md). Submit raw records, exact model IDs, task versions, settings, and scoring rationale. Do not invent or infer a model's underlying weights from a hosted alias.
+## Related lists
+
+- [Awesome Uncensored LLMs](https://github.com/Anil-matcha/awesome-uncensored-llms) — broader model catalog and provenance notes.
+- [Awesome Abliterated LLMs](https://github.com/Anil-matcha/awesome-abliterated-llms) — hosted endpoint guide and API examples.
+- [Awesome Uncensored AI Agents](https://github.com/Anil-matcha/awesome-uncensored-ai-agents) — agent setup and safety guidance.
 
 ## License
 
-Benchmark tasks, runner, and documentation are licensed under MIT. See [`LICENSE`](LICENSE). Model services and linked third-party tools retain their own terms.
+The benchmark tasks, runner, and documentation in this repository are MIT licensed; see [LICENSE](LICENSE). Listed models, APIs, and coding-agent applications are governed by their respective terms.
