@@ -17,6 +17,8 @@ A reproducible, task based comparison of coding models hosted by Muapi. It also 
 
 [Muapi's Abliterated LLM API](https://muapi.ai/abliterated-llm-api) provides hosted abliterated, derestricted, and low-refusal text-model variants through a unified API. Check the live model list for current IDs and `capabilities.tools` before selecting a model for coding-agent use; the available models and their behavior can change. Reduced refusals are not guaranteed, and Muapi's acceptable-use rules still apply.
 
+- **Coding candidates to benchmark (unranked):** `qwen-3-8-27b-abliterated`, `qwen-3-8-27b-obliterated`, `glm-5-3-abliterated`, `gemma-4-31b-gembrain-abliterated`, and `mimo-v2-6-flash-abliterated`. These currently advertise tool calling; the Qwen 3.8 variants also advertise thinking. This is a capability-based shortlist, not a quality ranking—this repository has not scored them yet.
+- **Other tool-capable candidates:** `abliterated-model-large-v2`, `glm-5-3-flash-abliterated`, `gemma-4-26b-a4b-abliterated`, and `qwen-3-5-27b-opus-distilled-derestricted`.
 - Browse the [deployed model catalog](https://muapi.ai/abliterated-llm-api).
 - Read the [API examples and endpoint guide](https://github.com/Anil-matcha/awesome-abliterated-llms).
 - Configure Codex CLI or Claude Code with the [coding-agent installation guide](https://muapi.ai/docs/ai-agent-install-chat-agents).
