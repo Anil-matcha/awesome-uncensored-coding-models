@@ -13,6 +13,15 @@ A reproducible, task based comparison of coding models hosted by Muapi. It also 
 - [Muapi dashboard](https://muapi.ai/dashboard) — create API keys and review usage.
 - [Muapi](https://muapi.ai) — hosted model APIs and coding-agent integrations.
 
+## Muapi-hosted abliterated LLM API
+
+[Muapi's Abliterated LLM API](https://muapi.ai/abliterated-llm-api) provides hosted abliterated, derestricted, and low-refusal text-model variants through a unified API. Check the live model list for current IDs and `capabilities.tools` before selecting a model for coding-agent use; the available models and their behavior can change. Reduced refusals are not guaranteed, and Muapi's acceptable-use rules still apply.
+
+- Browse the [deployed model catalog](https://muapi.ai/abliterated-llm-api).
+- Read the [API examples and endpoint guide](https://github.com/Anil-matcha/awesome-abliterated-llms).
+- Configure Codex CLI or Claude Code with the [coding-agent installation guide](https://muapi.ai/docs/ai-agent-install-chat-agents).
+- Check live IDs and tool support with `GET https://api.muapi.ai/v1/models?type=text`.
+
 ## Current status
 
 The Muapi API runner, task set, and agent setup guides are ready. **No model has been scored yet.** Rankings stay empty until runs and review notes are published.
