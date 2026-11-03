@@ -1,5 +1,8 @@
 # Awesome Uncensored Coding Models
 
+<p align="center"><a href="https://www.youtube.com/watch?v=pAH73nAoOCQ"><img src="https://i.ytimg.com/vi/pAH73nAoOCQ/maxresdefault.jpg" width="720"></a></p>
+<p align="center"><a href="https://www.youtube.com/watch?v=pAH73nAoOCQ"><b>▶  Watch: Free Uncensored AI Generator : Open Source, No Restrictions </b></a></p>
+
 A curated directory of language models people use or evaluate for programming, software maintenance, and coding-agent work. It focuses on models described by their communities as **uncensored**, **abliterated**, **derestricted**, or **low-refusal**. This project records exact model IDs, access methods, coding use cases, and evidence where available.
 
 “Uncensored” is an informal label, not a standardized model property or promise. It does not mean a model is unrestricted, accurate, secure, private, or suitable for every use. Evaluate the exact model and host for your task, and follow the applicable terms and acceptable-use rules.
